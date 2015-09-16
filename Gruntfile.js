@@ -1,8 +1,14 @@
 module.exports = function(grunt) {
 
+  // 1. All configuration goes here
   grunt.initConfig({
     pkg: grunt.file.readJSON('package.json'),
     concat: {
+    // 2. Configuration for concatinating files goes here.
+      dist: {
+        src: ['public/client/*.js','public/lib/*.js'],
+        dest: 'public/build/production.js'
+      }
     },
 
     mochaTest: {
@@ -63,6 +69,7 @@ module.exports = function(grunt) {
     },
   });
 
+  // 3. Where we tell Grunt we plan to use this plug-in.
   grunt.loadNpmTasks('grunt-contrib-uglify');
   grunt.loadNpmTasks('grunt-contrib-jshint');
   grunt.loadNpmTasks('grunt-contrib-watch');
@@ -72,6 +79,7 @@ module.exports = function(grunt) {
   grunt.loadNpmTasks('grunt-shell');
   grunt.loadNpmTasks('grunt-nodemon');
 
+  // 4. Where we tell Grunt what to do when we type "grunt" into the terminal.
   grunt.registerTask('server-dev', function (target) {
     // Running nodejs in a different process and displaying output on the main console
     var nodemon = grunt.util.spawn({
