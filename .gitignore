@@ -20,4 +20,4 @@ public/dist/
 node_modules/
 
 # WebStorm files
-.idea/
+db/shortly.sqlite
