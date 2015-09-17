@@ -3,18 +3,23 @@ module.exports = function(grunt) {
   // 1. All configuration goes here
   grunt.initConfig({
     pkg: grunt.file.readJSON('package.json'),
+
+    clean: ['public/dist'],
+
     concat: {
-      // options: {
-      //   separator : ';'
-      // },
-    // 2. Configuration for concatinating files goes here.
-      dist: {
-        src: ['public/lib/jquery.js','public/lib/underscore.js','public/lib/backbone.js','public/lib/handlebars.js','public/client/app.js','public/client/createLinkView.js','public/client/link.js','public/client/links.js','public/client/linkView.js','public/client/linksView.js','public/client/router.js'],
-        dest: 'public/dist/production.js'
+      options: {
+        separator : ';'
       },
-      // files: {
-      //   'public/dist/production.js': ['public/lib/**/*.js','public/client/**/*.js']
-      // }
+    // 2. Configuration for concatinating files goes here.
+      dist1: {
+        src: ['public/client/app.js','public/client/createLinkView.js','public/client/link.js','public/client/links.js','public/client/linkView.js','public/client/linksView.js','public/client/router.js'],
+        dest: 'public/dist/production_client.js'
+      },
+      dist2: {
+        src: ['public/lib/jquery.js','public/lib/underscore.js','public/lib/backbone.js','public/lib/handlebars.js'],
+        dest: 'public/dist/production_lib.js'
+      }
+
     },
 
     mochaTest: {
@@ -36,24 +41,26 @@ module.exports = function(grunt) {
       dynamic: {
         files: [{
           expand: true,
-          cwd: 'images/',
-          src: ['**/*.{png,jpg,gif,jpeg}'],
-          dest: 'public_deploy/images'
+          cwd: 'public',
+          src: ['*.{png,jpg,gif,jpeg}'],
+          dest: 'public/dist'
         }]
       }
     },
 
     uglify: {
-      build: {
-        src: 'public/dist/production.js',
-        dest: 'public/dist/production.min.js'
+      build1: {
+        src: 'public/dist/production_client.js',
+        dest: 'public/dist/production_client.min.js'
+      },
+      build2: {
+        src: 'public/dist/production_lib.js',
+        dest: 'public/dist/production_lib.min.js'
       }
     },
 
     jshint: {
-      files: [
-        // Add filespec list here
-      ],
+      files: ['public/client'],
       options: {
         force: 'true',
         jshintrc: '.jshintrc',
@@ -65,6 +72,15 @@ module.exports = function(grunt) {
     },
 
     cssmin: {
+      target: {
+        files: [{
+          expand: true,
+          cwd: 'public',
+          src: ['*.css'],
+          dest: 'public/dist',
+          ext: '.min.css'
+        }]
+      }
     },
 
     watch: {
@@ -101,6 +117,7 @@ module.exports = function(grunt) {
   grunt.loadNpmTasks('grunt-shell');
   grunt.loadNpmTasks('grunt-nodemon');
   grunt.loadNpmTasks('grunt-contrib-imagemin');
+  grunt.loadNpmTasks('grunt-contrib-clean');
 
   // 4. Where we tell Grunt what to do when we type "grunt" into the terminal.
   grunt.registerTask('server-dev', function (target) {
@@ -138,7 +155,7 @@ module.exports = function(grunt) {
   // grunt.registerTask('deploy', [
   //   // add your deploy tasks here
   // ]);
-// , 'uglify', 'imagemin'
+// 'imagemin'
 
-  grunt.registerTask('default', ['concat']);
+  grunt.registerTask('default', ['clean', 'concat', 'uglify', 'cssmin','jshint','mochaTest']);
 };

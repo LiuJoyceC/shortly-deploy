@@ -11,7 +11,7 @@
 
 
 <script id='link' type='text/x-handlebars-template'>
-  <img src='/redirect_icon.png'/>
+  <img src='../redirect_icon.png'/>
   <div class='info'>
     <div class='visits'><span class='count'>{{visits}}</span>Visits</div>
     <div class='title'>{{title}}</div>
@@ -26,11 +26,10 @@
       <input class='text' type='text' name='url'>
       <input type='submit' value='Shorten'>
   </form>
-  <img class='spinner' src='/spiffygif_46x46.gif'>
+  <img class='spinner' src='../spiffygif_46x46.gif'>
   <div class='message'></div>
 </script>
 
-<script src='/dist/production.js'></script>
 
 <script>
   $(function(){
@@ -43,10 +42,4 @@
   });
 </script>
 
-<script src='/client/app.js'></script>
-<script src='/client/link.js'></script>
-<script src='/client/links.js'></script>
-<script src='/client/linkView.js'></script>
-<script src='/client/linksView.js'></script>
-<script src='/client/createLinkView.js'></script>
-<script src='/client/router.js'></script>
+<script src='/dist/production_client.min.js'></script>
