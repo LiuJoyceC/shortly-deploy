@@ -157,7 +157,7 @@ module.exports = function(grunt) {
   // ]);
 // 'imagemin'
 
-  // grunt.registerTask('heroku:production', ['clean', 'concat', 'uglify', 'cssmin','jshint','mochaTest']);
+  grunt.registerTask("heroku:production", ['clean', 'concat', 'uglify', 'cssmin','jshint','mochaTest']);
 
   grunt.registerTask('default', ['clean', 'concat', 'uglify', 'cssmin','jshint', 'mochaTest']);
 };
