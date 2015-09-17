@@ -1,0 +1,12 @@
+<script src='/client/app.js'></script>
+<script src='/client/link.js'></script>
+<script src='/client/links.js'></script>
+<script src='/client/linkView.js'></script>
+<script src='/client/linksView.js'></script>
+<script src='/client/createLinkView.js'></script>
+<script src='/client/router.js'></script> 
+
+<script src="/lib/jquery.js"></script>
+    <script src="/lib/underscore.js"></script>
+    <script src="/lib/backbone.js"></script>
+     <script src="/lib/handlebars.js"></script> 
