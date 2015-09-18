@@ -21,3 +21,6 @@ node_modules/
 
 # WebStorm files
 db/shortly.sqlite
+
+# Mongo database
+data/

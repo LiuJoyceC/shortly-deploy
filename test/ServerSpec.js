@@ -11,7 +11,9 @@ var Link = require('../app/models/link');
 // NOTE: these tests are designed for mongo!
 /////////////////////////////////////////////////////
 
-xdescribe('', function() {
+//console.log("app is: "+app);
+
+describe('', function() {
 
   beforeEach(function(done) {
     // Log out currently signed in user
@@ -29,7 +31,7 @@ xdescribe('', function() {
   });
 
   describe('Link creation: ', function() {
-
+//Test 1
     it('Only shortens valid urls, returning a 404 - Not found for invalid urls', function(done) {
       request(app)
         .post('/links')
@@ -40,7 +42,7 @@ xdescribe('', function() {
     });
 
     describe('Shortening links:', function() {
-
+//Test 2
       it('Responds with the short code', function(done) {
         request(app)
           .post('/links')
@@ -53,7 +55,7 @@ xdescribe('', function() {
           })
           .end(done);
       });
-
+//Test 3
       it('New links create a database entry', function(done) {
         request(app)
           .post('/links')
@@ -69,7 +71,7 @@ xdescribe('', function() {
           })
           .end(done);
       });
-
+//Test 4
       it('Fetches the link url title', function(done) {
         request(app)
           .post('/links')
@@ -102,7 +104,7 @@ xdescribe('', function() {
           done();
         });
       });
-
+//Test 5
       it('Returns the same shortened code if attempted to add the same URL twice', function(done) {
         var firstCode = link.code
         request(app)
@@ -116,8 +118,9 @@ xdescribe('', function() {
           })
           .end(done);
       });
-
+//Test 6
       it('Shortcode redirects to correct url', function(done) {
+        console.log('link is ' + JSON.stringify(link));
         var sha = link.code;
         request(app)
           .get('/' + sha)
@@ -137,6 +140,7 @@ xdescribe('', function() {
 
     // /*  Authentication  */
     // // TODO: xit out authentication
+//Test 7
     it('Redirects to login page if a user tries to access the main page and is not signed in', function(done) {
       request(app)
         .get('/')
@@ -146,7 +150,7 @@ xdescribe('', function() {
         })
         .end(done);
     });
-
+//Test 8
     it('Redirects to login page if a user tries to create a link and is not signed in', function(done) {
       request(app)
         .get('/create')
@@ -156,7 +160,7 @@ xdescribe('', function() {
         })
         .end(done);
     });
-
+//Test 9
     it('Redirects to login page if a user tries to see all of the links and is not signed in', function(done) {
       request(app)
         .get('/links')
@@ -170,7 +174,7 @@ xdescribe('', function() {
   }); // 'Privileged Access'
 
   describe('Account Creation:', function(){
-
+//Test 10
     it('Signup creates a new user', function(done) {
       request(app)
         .post('/signup')
@@ -186,7 +190,7 @@ xdescribe('', function() {
         })
         .end(done);
     });
-
+//Test 11
     it('Successful signup logs in a new user', function(done) {
       request(app)
         .post('/signup')
@@ -215,7 +219,7 @@ xdescribe('', function() {
         done();
       });
     });
-
+//Test 12
     it('Logs in existing users', function(done) {
       request(app)
         .post('/login')
@@ -228,7 +232,7 @@ xdescribe('', function() {
         })
         .end(done);
     });
-
+//Test 13
     it('Users that do not exist are kept on login page', function(done) {
       request(app)
         .post('/login')

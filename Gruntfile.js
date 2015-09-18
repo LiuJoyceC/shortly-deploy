@@ -4,7 +4,7 @@ module.exports = function(grunt) {
   grunt.initConfig({
     pkg: grunt.file.readJSON('package.json'),
 
-    clean: ['public/dist'],
+    clean: ['public/dist' /*, 'db/shortly.sqlite' */],
 
     concat: {
       options: {
@@ -152,10 +152,7 @@ module.exports = function(grunt) {
     }
   });
 
-  // grunt.registerTask('deploy', [
-  //   // add your deploy tasks here
-  // ]);
-// 'imagemin'
+  grunt.registerTask('deploy', ['clean', 'concat', 'uglify', 'cssmin','jshint', 'mochaTest']);
 
   grunt.registerTask("heroku:production", ['clean', 'concat', 'uglify', 'cssmin','jshint','mochaTest']);
 
