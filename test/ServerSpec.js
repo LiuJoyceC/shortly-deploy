@@ -6,6 +6,8 @@ var app = require('../server.js');
 var db = require('../app/config');
 var User = require('../app/models/user');
 var Link = require('../app/models/link');
+var util = require('../lib/utility');
+var bcrypt = require('bcrypt-nodejs');
 
 /////////////////////////////////////////////////////
 // NOTE: these tests are designed for mongo!
@@ -97,7 +99,8 @@ describe('', function() {
           url: 'http://www.roflzoo.com/',
           title: 'Rofl Zoo - Daily funny animal pictures',
           base_url: 'http://127.0.0.1:4568',
-          visits: 0
+          visits: 0,
+          code: util.codeUrl('http://www.roflzoo.com/')
         })
 
         link.save(function() {
@@ -122,6 +125,7 @@ describe('', function() {
       it('Shortcode redirects to correct url', function(done) {
         console.log('link is ' + JSON.stringify(link));
         var sha = link.code;
+        console.log('sha is ' + sha);
         request(app)
           .get('/' + sha)
           .expect(302)
@@ -214,7 +218,7 @@ describe('', function() {
     beforeEach(function(done) {
       new User({
           'username': 'Phillip',
-          'password': 'Phillip'
+          'password': bcrypt.hashSync('Phillip', null, null)
       }).save(function(){
         done();
       });

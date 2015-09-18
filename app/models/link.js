@@ -29,6 +29,4 @@ var mongoose = require('mongoose');
 var Url = mongoose.model('Url', urlSchema);
 
 
-
-
 module.exports = Url;
